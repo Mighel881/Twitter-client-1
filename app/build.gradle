@@ -51,5 +51,9 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation 'com.facebook.stetho:stetho:1.5.1'
 
+    // for refreshing the page by scrolling down from the top
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
+    // additional third-party library, glide-transformations
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
 }

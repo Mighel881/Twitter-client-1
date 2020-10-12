@@ -18,6 +18,8 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
     Context context;
     List<Tweet> tweets;
@@ -67,23 +69,30 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivProfileImageUrl;
-        TextView tvBody;
+        TextView tvName;
         TextView tvScreenName;
+        TextView tvBody;
         TextView tvTimestamp;
 
         // itemView is a representation of one row, or one tweet
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProfileImageUrl = itemView.findViewById(R.id.ivProfileImage);
-            tvBody = itemView.findViewById(R.id.tvBody);
+            tvName = itemView.findViewById(R.id.tvName);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
+            tvBody = itemView.findViewById(R.id.tvBody);
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
         }
 
         public void bind(Tweet tweet) {
+            Glide.with(context)
+                    .load(tweet.user.publicImageUrl)
+                    .transform(new RoundedCornersTransformation(75, 0))
+                    .into(ivProfileImageUrl);
+
+            tvName.setText(tweet.user.name);
+            tvScreenName.setText("@" + tweet.user.screenName);
             tvBody.setText(tweet.body);
-            tvScreenName.setText(tweet.user.screenName);
-            Glide.with(context).load(tweet.user.publicImageUrl).into(ivProfileImageUrl);
             tvTimestamp.setText(tweet.getFormattedTimestamp(tweet.createdAt));
         }
     }

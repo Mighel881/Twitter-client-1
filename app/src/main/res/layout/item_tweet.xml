@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -14,32 +16,49 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="6dp"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        tools:text="Rennah Weng"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        />
 
     <TextView
         android:id="@+id/tvScreenName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvName"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
-        tools:text="rennahweng"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        />
+        android:textColor="@color/medium_gray"
+        android:textSize="15dp"
+        tools:text="\@rennahweng" />
 
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvScreenName"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
+        android:layout_below="@+id/tvName"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:text="This is my tweet body!!"
-        android:textColor="@color/darkgray"/>
+        android:textColor="@color/darkgray"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:textSize="16dp"
+        />
 
     <TextView
         android:id="@+id/tvTimestamp"
@@ -48,5 +67,52 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         tools:text="28m" />
+
+    <Button
+        android:id="@+id/btnRetweet"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@id/ivProfileImage"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/ic_vector_retweet"
+        android:focusable="true"
+        android:clickable="true"
+        />
+
+    <Button
+        android:id="@+id/btnLike"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@id/btnRetweet"
+        android:layout_marginStart="100dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ic_vector_heart"
+        android:focusable="true"
+        android:clickable="true"
+        />
+
+    <Button
+        android:id="@+id/btnMessage"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@id/btnLike"
+        android:layout_marginStart="100dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ic_vector_messages"
+        android:focusable="true"
+        android:clickable="true"
+        />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:layout_below="@id/btnRetweet"/>
 
 </RelativeLayout>

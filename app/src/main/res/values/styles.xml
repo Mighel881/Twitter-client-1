@@ -6,6 +6,9 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="colorPrimary">@color/twitter_blue</item>
+        <item name="colorPrimaryDark">@color/twitter_blue_fill_pressed</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 
     <!-- Application theme. -->

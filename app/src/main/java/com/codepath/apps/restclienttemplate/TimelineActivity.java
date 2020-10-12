@@ -40,6 +40,12 @@ public class TimelineActivity extends AppCompatActivity {
 
         client = TwitterApplication.getRestClient(this);
 
+        /**
+         * Add logo to actionbar
+         */
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_launcher_twitter);
+
 
         /**
          * Setup swipe refresh listener which triggers new data loading
