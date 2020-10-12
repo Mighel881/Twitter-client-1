@@ -17,8 +17,13 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [x] User can view more tweets as they scroll with infinite pagination
-- [ ] Improve the user interface and theme the app to feel "twitter branded"
-- [ ] Links in tweets are clickable and will launch the web browser
+- [x] Improve the user interface and theme the app to feel "twitter branded"
+  - [x] Display both user's name and screen name for each tweet, mimics twitter's offcial tweet view.
+  - [x] Make all user profiles round, just like how Twitter display them.
+  - [x] Add multiple action buttons: retweet button, like/heart button, and message button.
+  - [x] Set app logo as the twitter icon.
+  - [x] Put app logo on log-in activity page.
+- [x] Links in tweets are clickable and will launch the web browser
 - [ ] User can tap a tweet to display a "detailed" view of that tweet
 - [ ] User can see embedded image media within the tweet detail view
 - [ ] User can watch embedded video within the tweet
@@ -26,8 +31,6 @@ The following **optional** features are implemented:
 - [ ] On the Twitter timeline, leverage the CoordinatorLayout to apply scrolling behavior that hides / shows the toolbar.
 
 The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
 
 ## Video Walkthrough
 
