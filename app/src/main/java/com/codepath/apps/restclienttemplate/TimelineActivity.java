@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -20,6 +21,7 @@ import com.codepath.apps.restclienttemplate.models.TweetWithUser;
 import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.github.scribejava.apis.TwitterApi;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +44,7 @@ public class TimelineActivity extends AppCompatActivity {
     List<Tweet> tweets;
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
+    FloatingActionButton fabCompose;
 
     TweetDao tweetDao;
 
@@ -113,6 +116,21 @@ public class TimelineActivity extends AppCompatActivity {
         // Adds the scroll listener to RecyclerView
         rvTweets.addOnScrollListener(scrollListener);
 
+
+        /*
+         * Add floating action bar to compose tweet
+         */
+        fabCompose = findViewById(R.id.fabCompose);
+//        fabCompose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // Navigate to the compose activity
+//                Intent intent = new Intent();
+//                startActivityForResult(intent, REQUEST_CODE);
+//            }
+//        });
+
+
         // Query for existing tweets in the DB
         AsyncTask.execute(new Runnable() {
             @Override
@@ -177,7 +195,7 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Check if Compose icon is selected
-        if (item.getItemId() == R.id.compose) {
+        if (item.getItemId() == R.id.compose || item.getItemId() == R.id.fabCompose) {
             // Compose icon has been selected
             // Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
 
