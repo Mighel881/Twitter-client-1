@@ -23,6 +23,7 @@ The following **optional** features are implemented:
 - [x] User is using **"Twitter branded" colors and styles**
   - [x] Set compose icon as the twitter compose icon on ActionBar.
   - [x] Put twitter compose icon on Compose Activity page.
+  - [x] Changed compose "tweet" button to exactly how twitter's official tweet button looks like.
   - [x] Display both user's name and screen name for each tweet, mimics twitter's offcial tweet view.
   - [x] Make all user profiles round, just like how Twitter display them.
   - [x] Add multiple action buttons: retweet button, like/heart button, and message button.
