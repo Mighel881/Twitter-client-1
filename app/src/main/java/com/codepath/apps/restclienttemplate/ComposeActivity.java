@@ -3,12 +3,16 @@ package com.codepath.apps.restclienttemplate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcel;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -21,13 +25,16 @@ import java.util.Objects;
 
 import okhttp3.Headers;
 
+import static android.graphics.Color.*;
+
 public class ComposeActivity extends AppCompatActivity {
 
     public static final String TAG = "ComposeActivity";
     public static final int MAX_TWEET_LENGTH = 280;
 
-    EditText etCompose;
     Button btnTweet;
+    EditText etCompose;
+    TextView tvCounter;
 
     TwitterClient client;
 
@@ -36,8 +43,38 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
-        etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
+        tvCounter = findViewById(R.id.tvCounter);
+        etCompose = findViewById(R.id.etCompose);
+        /*
+         * Displaying a character count for the twitter client as the user types their tweet.
+         */
+        etCompose.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int before, int count) {
+                // Fires right as the text is being changed (even supplies the range of text)
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int count, int after) {
+                // Fires right before text is changing
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Fires right after the text has changed
+                int charCount = editable.toString().length();
+
+                if (charCount > 280) {
+                    tvCounter.setTextColor(RED);
+                    charCount = 280 - charCount;
+                } else {
+                    tvCounter.setTextColor(BLACK);
+                }
+                tvCounter.setText(charCount + "/280");
+            }
+        });
+
 
         client = TwitterApplication.getRestClient(this);
 
