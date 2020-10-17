@@ -1,12 +1,17 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -14,15 +19,19 @@ import com.github.scribejava.apis.TwitterApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Headers;
 
 public class TimelineActivity extends AppCompatActivity {
 
     public static final String TAG = "TimelineActivity";
+    // REQUEST_CODE can be any value we like, used to determine the result type later
+    public static final int REQUEST_CODE = 20;
 
     TwitterClient client;
     RecyclerView rvTweets;
@@ -40,14 +49,15 @@ public class TimelineActivity extends AppCompatActivity {
 
         client = TwitterApplication.getRestClient(this);
 
-        /**
-         * Add logo to actionbar
+        /*
+         * Add twitter bird logo to ActionBar
          */
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_launcher_twitter);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-        /**
+        /*
          * Setup swipe refresh listener which triggers new data loading
          */
         swipeContainer = findViewById(R.id.swipeContainer);
@@ -81,7 +91,7 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setAdapter(adapter);
 
 
-        /**
+        /*
          * Setup Endless Recycler View Scroll Listener to new endless tweets
          */
         scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
@@ -130,6 +140,53 @@ public class TimelineActivity extends AppCompatActivity {
                 tweets.get(tweets.size()-1).id
         );
     }
+
+
+    /**
+     * Adding "Compose" Tweet as action item on ActionBar
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Check if Compose icon is selected
+        if (item.getItemId() == R.id.compose) {
+            // Compose icon has been selected
+            // Toast.makeText(this, "Compose!", Toast.LENGTH_SHORT).show();
+
+            // Navigate to the compose activity
+            Intent intent = new Intent(this, ComposeActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Handle the result of the sub-activity
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Get data from sub-activity intent (tweet)
+            Tweet tweet = Parcels.unwrap( data.getParcelableExtra("tweet") );
+
+            // Update recyclerView with the new tweet
+            // Modify data source of tweets
+            tweets.add(0, tweet);
+            // Update the adapter
+            adapter.notifyItemChanged(0);
+            rvTweets.smoothScrollToPosition(0);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
 
     private void populateHomeTimeline() {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
