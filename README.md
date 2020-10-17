@@ -5,7 +5,7 @@ Twitter Client is an android app that allows users to view their Twitter timelin
 ------
 
 # Part 2
-Time spent: **X** hours spent in total
+Time spent: **6** hours spent in total
 
 ## User Stories
 
