@@ -44,8 +44,9 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories:
+Here's walkthroughs of implemented user stories:
 
+<img src='https://github.com/rennahweng/Twitter-client/blob/master/twitter-walkthrough-1.gif' width='300' alt='Video Walkthrough' />
 <img src='https://github.com/rennahweng/Twitter-client/blob/master/twitter-walkthrough-2.gif' width='300' title='Video Walkthrough Part 2' width='' alt='Video Walkthrough Part 2' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
